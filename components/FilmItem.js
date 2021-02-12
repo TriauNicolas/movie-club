@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 export const FilmItem = (props) => {
-    const {item, goToDetail} = props
+    const {item, goToDetails} = props
     
     return(
-        <TouchableOpacity style={styles.cards} onPress={goToDetail}>
+        <TouchableOpacity style={styles.cards} onPress={goToDetails}>
           <Image
             source={{ uri: `https://image.tmdb.org/t/p/original${item.poster_path}` }}
             style={styles.imageMovie}

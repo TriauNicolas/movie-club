@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useLayoutEffect } from 'react';
-import { StyleSheet, ScrollView, TextInput, Image, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, ScrollView, Image, Text, View } from 'react-native';
 import { movieDetails } from '../services/calls'
+import { Ionicons } from '@expo/vector-icons';
 
-export default function Homepage () {
-    // const {route, navigation}  = props
+export default function Details (props) {
+    const route  = props
     const [datas, setDatas] = useState([])
-
-    // useLayoutEffect(() => {
-    //     navigation.setOption({
-
-    //     })
-    // })
-
     
     useEffect(() => {
-        movieDetails(654).then(data => {
+        movieDetails(route.route.params.id).then(data => {
             setDatas(data)
         })
     }, [])
@@ -39,10 +32,7 @@ export default function Homepage () {
                             <Text style={styles.runtime}>{datas.runtime} minutes</Text>
                         </View>
                         <View style={styles.playButton}>
-                            <Image
-                                source={require('../assets/play.png')}
-                                style={styles.logoPlay}
-                            />
+                        <Ionicons name="md-play-circle" size={40} color="#B00020" />
                         </View>
                     </View>
                     <View style={styles.containerOverview}>
@@ -93,17 +83,15 @@ const styles = StyleSheet.create({
     padding: 10,
     top: -35,
   },
-  logoPlay: {
-    width: 40,
-    height: 40,
-    top: -18,
+  playButton: {
+    top: -22,
     marginLeft: 15,
   },
   containerOverview: {
     marginTop: -30
   },
   title: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#B5A90F',
     marginBottom: 15,
