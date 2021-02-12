@@ -24,13 +24,13 @@ export function searchMovie(textSearched) {
     ).then(result => result.json());
 }
 
-// export function getTopRated() {
-//     return fetch(
-//         getApiUrl(
-//             `/movie/top_rated`,
-//             {
-//                 language: 'fr-FR',
-//             }
-//         )
-//     ).then(result => result.json())
-// }
+export function movieDetails(id) {
+    return fetch(
+        getApiUrl(
+            `/movie/${id}`,
+            {
+                language: 'us-US',
+            }
+        )
+    ).then(result => result.json());
+}
