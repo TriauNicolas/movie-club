@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TextInput, Image, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, TextInput, Image, Text, View, FlatList, ScrollView } from 'react-native'
 import { searchMovie } from '../services/calls'
-import { FilmItem } from "../components/FilmItem";
+import { FilmItem } from "../components/FilmItem"
+import { Octicons } from '@expo/vector-icons'; 
 
-export default function Homepage () {
+export default function Search ({ navigation }) {
   const [datas, setDatas] = useState([])
 
   const handleTextChange = (value) => {
@@ -12,8 +13,6 @@ export default function Homepage () {
       setDatas(data)
     })
   }
-
-    console.log(datas)
 
       return (
         <View style={styles.container}>
@@ -25,10 +24,7 @@ export default function Homepage () {
             />
           </View>
             <View style={styles.textInputContainer}>
-              <Image
-                source={require('../assets/search.svg')}
-                style={styles.logoSearch}
-              />
+            <Octicons name="search" style={styles.logoSearch} size={32} color="black" />
               <TextInput
                 style={styles.inputText}
                 placeholder="Cherchez un film !"
@@ -50,17 +46,17 @@ export default function Homepage () {
               </Text>
             </View>
             : 
-              <SafeAreaView>
+              <ScrollView>
                 <FlatList
                   data={datas.results}
                   renderItem={({item}) => <FilmItem 
                     item={item}
-                    goToDetails={() => console.log('it works to change screen')}
+                    goToDetails={() => navigation.navigate('Details', {id: item.id})}
                   />}
                   keyExtractor={item => item.id.toString()}
                   style={styles.containerCards}
                 />
-              </SafeAreaView>
+              </ScrollView>
             }
         </View>
       );
@@ -71,12 +67,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logoContainer: {
-    flex: 1,
+    flex: 2,
     maxHeight: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 70,
-    marginBottom: 70,
+    marginTop: 100,
+    marginBottom: 100,
   },
   image: {
     width: 180,
@@ -87,9 +83,8 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     position: 'relative',
-    flex: 1,
-    maxHeight: 150,
     minHeight: 150,
+    maxHeight: 150,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#B00020',
@@ -98,8 +93,6 @@ const styles = StyleSheet.create({
   logoSearch: {
     position: 'absolute',
     left: 45,
-    width: 32,
-    height: 32,
   },
   inputText: {
     borderWidth: 1,
@@ -129,7 +122,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   containerCards: {
-    flex: 4,
+    flex: 3,
     marginTop: 25,
   },
 });

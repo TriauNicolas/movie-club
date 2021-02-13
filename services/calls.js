@@ -17,20 +17,33 @@ export function searchMovie(textSearched) {
             `/search/movie/`,
             {
                 query: textSearched,
-                language: 'us-US',
-                include_adult: true
+                language: 'fr-FR',
+                include_adult: true,
             }
         )
     ).then(result => result.json());
 }
 
-// export function getTopRated() {
-//     return fetch(
-//         getApiUrl(
-//             `/movie/top_rated`,
-//             {
-//                 language: 'fr-FR',
-//             }
-//         )
-//     ).then(result => result.json())
-// }
+export function searchGenreMovies(textSearched) {
+    return fetch(
+        getApiUrl(
+            `/discover/movie/`,
+            {
+                with_genres: textSearched,
+                language: 'fr-FR',
+                include_adult: true,
+            }
+        )
+    ).then(result => result.json());
+}
+
+export function movieDetails(id) {
+    return fetch(
+        getApiUrl(
+            `/movie/${id}`,
+            {
+                language: 'fr-FR',
+            }
+        )
+    ).then(result => result.json());
+}

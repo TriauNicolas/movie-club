@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image, Text, View, FlatList, SafeAreaView } from 'react-native';
 import { category } from '../services/calls'
 
-export default function Homepage () {
+export default function Homepage ({navigation}) {
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Homepage () {
             <View style={styles.cards}>
                 <Text 
                 style={styles.textCards}
-                onPress={() => console.log('pute')}>
+                onPress={() => navigation.navigate('SearchByGenres', {name: item.name, id: item.id})}>
                 { item.name }
                 </Text>
             </View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 10,
   },
   containerSafe: {
-    flex: 1,
+    flex: 4,
   },
   cards: {
     height: 50,
