@@ -15,10 +15,10 @@ Not that much, but honest work :)
 - react navigation
 - Icons are imported from the vector-icons expo library
 
-### Project setup
+## Project setup
 
 npm i
 
-### Project run
+## Project run
 
 expo start
